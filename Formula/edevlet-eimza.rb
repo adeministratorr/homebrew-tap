@@ -1,0 +1,49 @@
+class EdevletEimza < Formula
+  desc "e-Devlet E-Imza (Turksat): resmi jar'i indirip jpackage ile arm64 .app uretir (Zulu 11 goemulu, saidsurucu tabanli fix surum)"
+  homepage "https://github.com/adeministratorr/edevlet-eimza-mac-arm64"
+  version "2026.10.18"
+  url "https://github.com/adeministratorr/edevlet-eimza-mac-arm64/archive/refs/heads/main.tar.gz"
+  sha256 "85488daea78289a082d791bb85b5039dd70277ebcc46fa50d19846051532d41b"
+
+  def install
+    odie "Bu formul yalnizca Apple Silicon (arm64) icindir." unless Hardware::CPU.arm?
+    system "bash", "scripts/build.sh", "jdk"
+    system "bash", "scripts/build.sh", "jpackage-jdk"
+    system "bash", "scripts/build.sh", "all"
+    apps = Dir.glob("#{buildpath}/build/*.app").sort
+    odie "Uygulama uretilemedi (build/ bos)." if apps.empty?
+    app_file = File.basename(apps.first)
+    FileUtils.cp_r apps.first, prefix
+    (bin/"eimza-install-edevlet").write <<~EOS
+      #!/bin/bash
+      set -eu
+      APP="#{app_file}"
+      SRC="#{opt_prefix}/#{app_file}"
+      DEST="/Applications/${APP}"
+      osascript -e 'tell application "E-Devlet E-İmza" to quit' 2>/dev/null || true
+      if [ -e "$DEST" ]; then rm -rf "$DEST"; fi
+      ditto "$SRC" "$DEST"
+      echo "Kuruldu: $DEST"
+      echo "Yeniden imza (adhoc) uygulanıyor..."
+      codesign --force -s - --deep "$DEST" 2>/dev/null || true
+      echo "Açmak için Launchpad'den açın veya:"
+      echo "  open \"$DEST\""
+    EOS
+    chmod 0755, bin/"eimza-install-edevlet"
+  end
+
+  def caveats
+    <<~EOS
+      Bu formul kaynak koddan uretilir (Zulu 11 gomulu).
+      Homebrew /Applications'a yazamadigindan uygulama keg'de kalir;
+      kurulumdan sonra asagidaki komutu calistirin:
+
+        eimza-install-edevlet
+
+      e-imza icin TÜBİTAK AKİS arm64 (Apple Silicon) surucusu ayrica kurun:
+        https://akiskart.bilgem.tubitak.gov.tr/tr/destek/
+      Uygulama icinde PKCS#11 modulu: "Tubitak AKIS".
+      Ilk acilista "dev gelistirici" uyarisi: sag tik -> Ac.
+    EOS
+  end
+end
