@@ -1,6 +1,6 @@
 cask "i-download-manager" do
   version "1.4.2"
-  sha256 "c4d7445618c58852f5446cd094189031fd7207f144bf2e1db40c70328c804251"
+  sha256 "2472bcd9438ad5a3007179a8cfc3d129ee55cd5b4985836fc7e4005f22cba6bd"
 
   url "https://github.com/adeministratorr/i-download-manager/releases/download/v#{version}/iDownload-Manager-#{version}.dmg"
   name "iDownload Manager"
