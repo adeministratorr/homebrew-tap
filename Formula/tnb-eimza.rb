@@ -39,7 +39,12 @@ class TnbEimza < Formula
       if [ -e "$DEST" ]; then rm -rf "$DEST"; fi
       ditto "$SRC" "$DEST"
       echo "Kuruldu: $DEST"
-      codesign --force -s - --deep "$DEST" 2>/dev/null || true
+      if ! codesign --verify --deep "$DEST" >/dev/null 2>&1; then
+        for x in "$DEST/Contents/PlugIns"/*.appex; do
+          [ -e "$x" ] && codesign --force -s - --preserve-metadata=entitlements "$x" 2>/dev/null || true
+        done
+        codesign --force -s - --preserve-metadata=entitlements "$DEST" 2>/dev/null || true
+      fi
       HOST="#{opt_prefix}/share/tnb-eimza/install-host.sh"
       if [ -x "$HOST" ]; then "$HOST" 2>/dev/null || true; fi
       echo "open: $DEST"
