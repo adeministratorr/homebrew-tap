@@ -44,6 +44,20 @@ class UdfQuicklook < Formula
     chmod 0755, bin/"eimza-install-udf"
   end
 
+  def post_install
+    # brew'ın kurulum sonrası linkage düzeltmesi paket dosyalarına dokunup
+    # uygulama mührünü (CodeResources) bozabilir; keg kopyası relocation
+    # SONRASI yeniden imzalanmazsa QuickLook appex'leri geçersiz imzayla
+    # kalır ve pluginkit sessizce reddeder. appex'ler ve uygulama ayrı ayrı,
+    # entitlement'lar (app-sandbox) korunarak imzalanır.
+    Dir.glob("#{prefix}/*.app").each do |a|
+      Dir.glob("#{a}/Contents/PlugIns/*.appex").each do |x|
+        system "codesign", "--force", "-s", "-", "--preserve-metadata=entitlements", x
+      end
+      system "codesign", "--force", "-s", "-", "--preserve-metadata=entitlements", a
+    end
+  end
+
   def caveats
     <<~EOS
       Kurulumdan sonra /Applications'a yerlestirmek icin:
