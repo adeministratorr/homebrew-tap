@@ -1,3 +1,5 @@
+![macOS için e-imza ve UYAP araçları — Homebrew Tap](assets/social-preview.jpg)
+
 # macOS için e-imza ve UYAP araçları — Kurulum merkezi
 
 > **Kısa yanıt:** Mac'te e-Devlet'e e-imza ile girmeniz, UYAP belgesi açmanız, `.udf` önizlemesi ya da KEP/UETS işlemi yapmanız mı gerekiyor? Bu depo, bunun için gereken kurulum paketlerini tek yerde toplar. İşleminize uygun uygulamayı aşağıdaki tablodan seçin.
