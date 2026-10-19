@@ -11,6 +11,14 @@ class UdeMacArm64 < Formula
     system "make", "jdk"
     system "make", "jpackage-jdk"
     system "make", "all"
+    # libnativedialogkeys derleyici tarafından mutlak geçici build yolu kimliğiyle
+    # üretilir; brew'ın linkage düzeltmesi .app adındaki Türkçe karakterler (ö,ü)
+    # yüzünden ruby-macho'da UTF-8 çökmesi yaşar. Kimliği @rpath yapıyoruz
+    # (preserve_rpath korur); dosya çalışma anında MacTextKeys tarafından mutlak
+    # yolla yüklendiğinden LC_ID değişimi davranışı etkilemez.
+    Dir.glob("#{buildpath}/build/*.app/Contents/app/libnativedialogkeys.dylib").each do |tk|
+      system "install_name_tool", "-id", "@rpath/libnativedialogkeys.dylib", tk
+    end
     apps = Dir.glob("#{buildpath}/build/*.app").sort
     odie "Uygulama uretilemedi (build/ bos)." if apps.empty?
     app_file = File.basename(apps.first)
