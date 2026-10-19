@@ -1,12 +1,36 @@
-# UYAP ve e-imza araçları — macOS Apple Silicon (M1/M2/M3/M4) Homebrew Tap
+# macOS için e-imza ve UYAP araçları — Kurulum merkezi
 
-Avukatlar, bilirkişiler, arabulucular, noterler, mali müşavirler, doktorlar, mühendis ve mimarlar, gümrük müşavirleri, şirket yetkilileri ve kamu çalışanları için: UYAP, KEP, e-tebligat ve e-imza araçlarını **MacBook, MacBook Pro, MacBook Air, Mac mini ve iMac**'de (Apple Silicon / M serisi / ARM tabanlı işlemci) çalıştıran kurulum paketleri. Mac'te **"e-imza çalışmıyor"**, "UYAP/JNLP açılmıyor", "Java hatası" sorunlarına çözüm.
+> **Kısa yanıt:** Mac'te e-Devlet'e e-imza ile girmeniz, UYAP belgesi açmanız, `.udf` önizlemesi ya da KEP/UETS işlemi yapmanız mı gerekiyor? Bu depo, bunun için gereken kurulum paketlerini tek yerde toplar. İşleminize uygun uygulamayı aşağıdaki tablodan seçin.
+>
+> **Önce resmî uygulamalar:** UYAP'ın resmî [Adalet E-İmza](https://bedesten.adalet.gov.tr/imza/) uygulaması ve resmî [UYAP Doküman Editörü](https://www.uyap.gov.tr/Uyap-Editor) önceliklidir. Bu depodaki paketler **gayriresmî topluluk dağıtımlarıdır** ve resmî uygulamaların yerine geçmez. UYAP'a ArkSigner/e-imza uygulamasıyla giriş 1 Haziran 2026'da sonlandırıldı; giriş artık e-Devlet Kapısı veya Adalet E-İmza üzerinden yapılır.
 
-## Neden Mac'te e-imza çalışmıyor?
+## Hangi uygulamayı kurmalıyım?
 
-Bu paketlerin çözdüğü asıl sorun: Türkiye'deki e-imza/UYAP araçlarının çoğu Windows için yazılmıştı ya da Java Web Start (JNLP) ile dağıtılıyordu. **Java Web Start, Java 11 ile birlikte kaldırıldı**; resmî paketler de Intel (x86_64)/Rosetta'ya bağlı kaldı. Bu tap'teki paketler her aracı **gömülü arm64 Java 11** (veya native Swift) ile **MacBook, MacBook Pro, MacBook Air, Mac mini ve iMac**'de (Apple Silicon / M serisi / ARM tabanlı işlemci) çalışır hâle getirir. Her uygulamanın deposunda "neden bozuktu, nasıl çözdük" anlatımı ayrıntılı olarak vardır.
+| İşlem | Uygulama | En kolay kurulum |
+|---|---|---|
+| e-Devlet Kapısı'na e-imza ile giriş | E-Devlet E-İmza | `brew install --cask adeministratorr/tap/edevlet-eimza` |
+| PTT KEP Webmail'de imzalama | PTT KEP E-İmza | `brew install --cask adeministratorr/tap/pttkep-eimza` |
+| UETS / e-Tebligat imzalama | PTT UETS E-İmza | `brew install --cask adeministratorr/tap/uets-eimza` |
+| TNB KEP girişi (Chrome eklentisi) | TNB Teknoloji İmza | `brew install --cask adeministratorr/tap/tnb-eimza` |
+| UHAP ve CMK imzalama akışı | UHAP İmzalama | `brew install --cask adeministratorr/tap/uhap-eimza` |
+| UDF dosyasını yalnız görüntüleme | UDF Görüntüleyici (QuickLook) | `brew install --cask adeministratorr/tap/udf-quicklook` |
+| UDF açma / düzenleme | UYAP Doküman Editörü paketi | `brew install --cask adeministratorr/tap/ude-mac-arm64` |
+| UDF açma / düzenleme (resmî) | UYAP Doküman Editörü 5.4.21+ | [uyap.gov.tr/Uyap-Editor](https://www.uyap.gov.tr/Uyap-Editor) |
+| UYAP'a giriş (resmî) | Adalet E-İmza | [bedesten.adalet.gov.tr/imza](https://bedesten.adalet.gov.tr/imza/) |
 
-## Kurulum
+Homebrew yoksa her uygulamanın **Releases** sayfasından DMG indirilebilir (aşağıda bağlantılar var).
+
+## İlk kez kuranlar için
+
+1. **Kart sürücüsü:** Akıllı kartınız görünmüyorsa önce arm64 AKİS sürücüsünü kurun: [akiskart.bilgem.tubitak.gov.tr/destek](https://akiskart.bilgem.tubitak.gov.tr/destek/) → **"Mac OS Arm (Apple Silicon)"**. Kontrol: `lipo -archs /usr/local/lib/libakisp11.dylib` çıktısı `arm64` içermeli.
+2. **Uygulama:** Tablodan işleminize uygun paketi seçin. Hazır DMG en hızlı yoldur; Homebrew isteğe bağlıdır.
+3. **Başarılı kurulum nasıl anlaşılır?** Uygulama açıldığında imza/PIN penceresi gelir; tarayıcıdaki "imzalama aracı açık mı?" hatası kaybolur. UDF görüntüleyicide Finder'da dosya seçip **Boşluk** tuşuna basınca önizleme açılır.
+4. **Sık hata:** "Akıllı Kart Bulunamadı" → sürücü eksik/Intel sürücü kurulu. Gatekeeper uyarısı → cask kurulumu karantinayı kaldırır; yine çıkarsa sağ tık → **Aç**.
+5. **Önemli sınır:** Paketler resmî kurum uygulaması değildir; test edilmemiş kart, portal ve işlemler ilgili deponun README'sinde ayrıca yazılıdır. İmza PIN'inizi hiçbir komuta, issue'ya veya kişiye yazmayın.
+
+> **Güvenlik notu:** Kurulum betiklerini (`kur.sh`) çalıştırmadan önce içeriğini inceleyin. DMG paketleri Developer ID ile imzalı ve Apple notarizasyonundan geçmiştir; sürüm notlarında `sha256` değerleri bulunur. Ad-hoc imza, Apple notarizasyonu değildir.
+
+## Homebrew ile kurulum (isteğe bağlı)
 
 ```bash
 brew tap adeministratorr/tap
@@ -14,44 +38,35 @@ brew tap adeministratorr/tap
 
 > Homebrew ilk kullanımda tap güvenini sorabilir; onaylayın ya da `brew trust adeministratorr/tap` çalıştırın.
 
-### Hazır DMG ile (cask — derleme yok, en hızlı)
+### Hazır DMG (cask — derleme yok, en hızlı)
 
-| Uygulama | Ne için | Kurulum |
-|---|---|---|
-| E-Devlet E-İmza | e-Devlet'e e-imza ile giriş ve imzalama | `brew install --cask adeministratorr/tap/edevlet-eimza` |
-| PTT KEP E-İmza | PTT KEP Webmail e-imza (KEP yazışmaları) | `brew install --cask adeministratorr/tap/pttkep-eimza` |
-| PTT UETS E-İmza | UETS / e-Tebligat imzalama | `brew install --cask adeministratorr/tap/uets-eimza` |
-| TNB Teknoloji İmza | kep.hs02.kep.tr girişi (noterler; Chrome eklentisi) | `brew install --cask adeministratorr/tap/tnb-eimza` |
-| UHAP İmzalama | uhap.com.tr ve CMK (baro) imzalama akışı | `brew install --cask adeministratorr/tap/uhap-eimza` |
-| UDF Görüntüleyici | Finder'da `.udf` önizleme (QuickLook) | `brew install --cask adeministratorr/tap/udf-quicklook` |
-| UYAP Doküman Editörü | `.udf` açma/düzenleme (arm64 native) | `brew install --cask adeministratorr/tap/ude-mac-arm64` |
+Tablodaki `brew install --cask ...` komutlarını kullanın. Cask'ler hazır arm64 DMG'yi indirir; derleme gerektirmez.
 
 ### Kaynaktan derleyerek (formula)
 
-Aynı adlarla: `brew install adeministratorr/tap/<uygulama>` — örn:
+Aynı adlarla: `brew install adeministratorr/tap/<uygulama>` — örn. `brew install adeministratorr/tap/edevlet-eimza`. Formüller kendi makinenizde derler; UDF ve TNB formülleri Homebrew derleme sandbox'ı için gereken yamaları uygular. Derleme sonrası `eimza-install-*` yardımcı komutuyla uygulamayı `/Applications`'a kurun.
 
-```bash
-brew install adeministratorr/tap/edevlet-eimza
-```
+### Homebrew yok mu? — DMG ile kurun
 
-Formüller kendi makinenizde derler; UDF ve TNB formülleri, Homebrew derleme sandbox'ında çalışabilmek için gereken yamaları kendisi uygular. Derleme sonrası `eimza-install-*` yardımcı komutuyla uygulamayı /Applications'a kurun.
+[E-Devlet E-İmza](https://github.com/adeministratorr/edevlet-eimza-mac-arm64/releases) · [PTT KEP](https://github.com/adeministratorr/pttkep-eimza-mac-arm64/releases) · [PTT UETS](https://github.com/adeministratorr/uets-eimza-mac-arm64/releases) · [TNB](https://github.com/adeministratorr/tnb-eimza-mac-arm64/releases) · [UHAP](https://github.com/adeministratorr/uhap-eimza-mac-arm64/releases) · [UDF](https://github.com/adeministratorr/udf-quicklook-extension/releases) · [UYAP Editör](https://github.com/adeministratorr/ude-mac-arm64-1/releases)
 
-## Homebrew yok mu? — DMG ile kurun
+## Diğer uygulamalar
 
-Her uygulamanın deposundaki **Releases** bölümünde hazır arm64 DMG'ler var:
+Bu bölümdeki paket e-imza/UYAP ile ilgili değildir:
 
-- [E-Devlet E-İmza](https://github.com/adeministratorr/edevlet-eimza-mac-arm64/releases) · [PTT KEP](https://github.com/adeministratorr/pttkep-eimza-mac-arm64/releases) · [PTT UETS](https://github.com/adeministratorr/uets-eimza-mac-arm64/releases) · [TNB](https://github.com/adeministratorr/tnb-eimza-mac-arm64/releases) · [UHAP](https://github.com/adeministratorr/uhap-eimza-mac-arm64/releases) · [UDF](https://github.com/adeministratorr/udf-quicklook-extension/releases) · [UYAP Editör](https://github.com/adeministratorr/ude-mac-arm64-1/releases)
+| Uygulama | Ne için | Kurulum |
+|---|---|---|
+| iDownload Manager | Genel amaçlı indirme yöneticisi | `brew install --cask adeministratorr/tap/i-download-manager` |
 
 ## Sık sorulan sorular
 
-- **MacBook'umda e-imza çalışır mı?** Evet — paketler Apple Silicon (M1/M2/M3/M4) için native arm64'tür; Rosetta veya ayrı Java kurulumu gerekmez.
-- **Intel Mac'im var, çalışır mı?** Bu paketler arm64'tür; Intel desteklemez. (UYAP Doküman Editörü paketi Intel'de de derlenebilir, bkz. ilgili depo.)
-- **Mac'te "e-imza çalışmıyor", nereden başlamalıyım?** Önce doğru uygulamayı kurun (yukarıdaki tablo), sonra e-imza kartı sürücüsünü (arm64 AKİS) kurun.
-- **Kartım görünmüyor / "Akıllı Kart Bulunamadı"?** arm64 AKİS sürücüsü eksik: https://akiskart.bilgem.tubitak.gov.tr/tr/destek/ → "Mac OS Arm (Apple Silicon)" paketi. Kontrol: `lipo -archs /usr/local/lib/libakisp11.dylib` çıktısı `arm64` içermeli.
+- **MacBook'umda e-imza çalışır mı?** Paketler Apple Silicon (M serisi) için native arm64'tür; Rosetta veya ayrı Java kurulumu gerekmez.
+- **Intel Mac'im var, çalışır mı?** Bu paketler arm64'tür; Intel desteklemez. UYAP Doküman Editörü'nün resmî sürümünde hem Intel hem Apple Silicon paketi bulunur.
 - **PTT KEP mi UETS mi kurayım?** İşlem kodunuzu hangi arayüzden aldıysanız onu kurun — UETS (e-tebligat) ile PTT KEP Webmail farklı uygulamalardır, kodlar karşılıklı geçmez.
-- **Noterler hangi paketi kullanır?** TNB paketi (Türkiye Noterler Birliği KEP girişi).
-- **Gatekeeper "geliştirici doğrulanamadı" derse?** Cask kurulumları karantinayı otomatik kaldırır; `kur.sh` yolu ise uygulamayı kendi makinenizde derleyip imzaladığı için uyarı çıkmaz. Yine çıkarsa: sağ tık → Aç.
+- **Noterler hangi paketi kullanır?** TNB KEP girişi için TNB paketi; UYAP işlemleri için önce resmî Adalet E-İmza ve resmî editör.
+- **Kartım görünmüyor / "Akıllı Kart Bulunamadı"?** arm64 AKİS sürücüsü eksik olabilir; yukarıdaki sürücü adımına bakın.
+- **Gatekeeper "geliştirici doğrulanamadı" derse?** Cask kurulumları karantinayı kaldırır; `kur.sh` yolu uygulamayı kendi makinenizde derler. Yine çıkarsa: sağ tık → **Aç**.
 
 ## Bu tap nedir?
 
-Bu tap, [saidsurucu](https://github.com/saidsurucu) projelerinin Apple Silicon dağıtımını kolaylaştırır: hazır DMG release'leri + Homebrew cask/formül sarmalayıcıları içerir. UDF paketinde ek düzeltmeler (uygulama ikonu, karşılama penceresi) bu dağıtım sürümünde bulunur. Orijinal projeler ve teorik çalışma proje sahibine aittir; bu tap hiçbir kamu kurumuyla bağlantılı değildir (gayriresmî).
+Bu tap, [adeministratorr](https://github.com/adeministratorr) tarafından sürdürülen Apple Silicon dağıtımlarını toplar: hazır DMG release'leri + Homebrew cask/formül sarmalayıcıları. Paketlerin çoğu [saidsurucu](https://github.com/saidsurucu) projelerinin fork'udur; özgün projeler ve teorik çalışma proje sahibine aittir. Bu tap hiçbir kamu kurumuyla bağlantılı değildir (gayriresmî).
