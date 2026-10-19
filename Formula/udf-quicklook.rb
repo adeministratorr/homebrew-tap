@@ -3,7 +3,7 @@ class UdfQuicklook < Formula
   homepage "https://github.com/adeministratorr/udf-quicklook-extension"
   version "2026.10.19"
   url "https://github.com/adeministratorr/udf-quicklook-extension/archive/refs/heads/main.tar.gz"
-  sha256 "bbfe7171766a364636e9470f86ed83ccd390d73c25916b9e37ef52460069d134"
+  sha256 "fb34e5891c5e883b90596e326589f22cc12ac2dbe39fec3e913135a37044d0b5"
 
   def install
     # brew 6+ derleme sandbox'i icinde SwiftPM'in kendi manifest sandbox'i

@@ -3,7 +3,7 @@ class EdevletEimza < Formula
   homepage "https://github.com/adeministratorr/edevlet-eimza-mac-arm64"
   version "2026.10.18"
   url "https://github.com/adeministratorr/edevlet-eimza-mac-arm64/archive/refs/heads/main.tar.gz"
-  sha256 "85488daea78289a082d791bb85b5039dd70277ebcc46fa50d19846051532d41b"
+  sha256 "031f2b8670e2db284bd97bd7926dd007cc0f3ee139a0a7d2421f57283f9e431b"
 
   def install
     odie "Bu formul yalnizca Apple Silicon (arm64) icindir." unless Hardware::CPU.arm?
