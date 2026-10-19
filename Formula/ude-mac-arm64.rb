@@ -5,6 +5,8 @@ class UdeMacArm64 < Formula
   url "https://github.com/saidsurucu/ude-mac-arm64/archive/refs/heads/main.tar.gz"
   sha256 "3133935fae2bc1b2dd1cfe408a981acf872d2cfe414b89d36f335020b0d5fc28"
 
+  preserve_rpath
+
   def install
     system "make", "jdk"
     system "make", "jpackage-jdk"

@@ -5,6 +5,8 @@ class EdevletEimza < Formula
   url "https://github.com/adeministratorr/edevlet-eimza-mac-arm64/archive/refs/heads/main.tar.gz"
   sha256 "031f2b8670e2db284bd97bd7926dd007cc0f3ee139a0a7d2421f57283f9e431b"
 
+  preserve_rpath
+
   def install
     odie "Bu formul yalnizca Apple Silicon (arm64) icindir." unless Hardware::CPU.arm?
     system "bash", "scripts/build.sh", "jdk"

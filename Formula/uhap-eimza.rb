@@ -5,6 +5,8 @@ class UhapEimza < Formula
   url "https://github.com/saidsurucu/uhap-eimza-mac-arm64/archive/refs/heads/main.tar.gz"
   sha256 "a62c3250369d86c4dee7feeec5001980a6456bfe40dd9487697f0e6dea9797be"
 
+  preserve_rpath
+
   def install
     odie "Bu formul yalnizca Apple Silicon (arm64) icindir." unless Hardware::CPU.arm?
     icns = buildpath/"assets/UHAPImza.icns"

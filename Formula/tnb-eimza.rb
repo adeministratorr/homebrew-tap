@@ -5,6 +5,8 @@ class TnbEimza < Formula
   url "https://github.com/saidsurucu/tnb-eimza-mac-arm64/archive/refs/heads/main.tar.gz"
   sha256 "c6c2510d1c29c9240151172a0394d68af674867526af9916b167422799459f12"
 
+  preserve_rpath
+
   def install
     odie "Bu formul yalnizca Apple Silicon (arm64) icindir." unless Hardware::CPU.arm?
     icns = buildpath/"assets/TNBTeknolojiImza.icns"

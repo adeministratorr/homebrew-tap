@@ -5,6 +5,8 @@ class UetsEimza < Formula
   url "https://github.com/saidsurucu/uets-eimza-mac-arm64/archive/refs/heads/main.tar.gz"
   sha256 "a9c406abb5a38f47398778c89710286c1604689f8d8efbe7a5c1ef1b7608c971"
 
+  preserve_rpath
+
   def install
     odie "Bu formul yalnizca Apple Silicon (arm64) icindir." unless Hardware::CPU.arm?
     system "bash", "scripts/build.sh", "jdk"

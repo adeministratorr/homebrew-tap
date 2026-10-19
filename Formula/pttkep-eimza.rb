@@ -5,6 +5,8 @@ class PttkepEimza < Formula
   url "https://github.com/saidsurucu/pttkep-eimza-mac-arm64/archive/refs/heads/main.tar.gz"
   sha256 "9b2d348c256d4c648319c8dd9d7c58bcc923f0c07a63c5a498ffd63d5ab5a4a6"
 
+  preserve_rpath
+
   def install
     odie "Bu formul yalnizca Apple Silicon (arm64) icindir." unless Hardware::CPU.arm?
     system "bash", "scripts/build.sh", "jdk"
