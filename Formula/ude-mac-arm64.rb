@@ -15,12 +15,17 @@ class UdeMacArm64 < Formula
     # üretilir; brew'ın linkage düzeltmesi .app adındaki Türkçe karakterler (ö,ü)
     # yüzünden ruby-macho'da UTF-8 çökmesi yaşar. Kimliği @rpath yapıyoruz
     # (preserve_rpath korur); dosya çalışma anında MacTextKeys tarafından mutlak
-    # yolla yüklendiğinden LC_ID değişimi davranışı etkilemez.
+    # yolla yüklendiğinden LC_ID değişimi davranışı etkilemez. install_name_tool
+    # imzayı geçersiz kıldığından dylib'i ve uygulama mührünü yeniden imzalıyoruz
+    # (Contents/app standart dışı konum olduğundan codesign --deep bu dylib'i
+    #  kapsamaz; aksi halde dyld "Code Signature Invalid" ile uygulamayı öldürür).
     Dir.glob("#{buildpath}/build/*.app/Contents/app/libnativedialogkeys.dylib").each do |tk|
       system "install_name_tool", "-id", "@rpath/libnativedialogkeys.dylib", tk
+      system "codesign", "--force", "-s", "-", "--preserve-metadata=entitlements", tk
     end
     apps = Dir.glob("#{buildpath}/build/*.app").sort
     odie "Uygulama uretilemedi (build/ bos)." if apps.empty?
+    apps.each { |a| system "codesign", "--force", "-s", "-", "--preserve-metadata=entitlements", a }
     app_file = File.basename(apps.first)
     FileUtils.cp_r apps.first, prefix
     (bin/"eimza-install-ude").write <<~EOS
