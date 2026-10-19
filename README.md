@@ -28,7 +28,7 @@ Homebrew yoksa her uygulamanın **Releases** sayfasından DMG indirilebilir (aş
 4. **Sık hata:** "Akıllı Kart Bulunamadı" → sürücü eksik/Intel sürücü kurulu. Gatekeeper uyarısı → cask kurulumu karantinayı kaldırır; yine çıkarsa sağ tık → **Aç**.
 5. **Önemli sınır:** Paketler resmî kurum uygulaması değildir; test edilmemiş kart, portal ve işlemler ilgili deponun README'sinde ayrıca yazılıdır. İmza PIN'inizi hiçbir komuta, issue'ya veya kişiye yazmayın.
 
-> **Güvenlik notu:** Kurulum betiklerini (`kur.sh`) çalıştırmadan önce içeriğini inceleyin. DMG paketleri Developer ID ile imzalı ve Apple notarizasyonundan geçmiştir; sürüm notlarında `sha256` değerleri bulunur. Ad-hoc imza, Apple notarizasyonu değildir.
+> **Güvenlik notu:** Kurulum betiklerini (`kur.sh`) çalıştırmadan önce içeriğini inceleyin. E-imza/UYAP paketlerinin DMG'leri Developer ID ile imzalı ve Apple notarizasyonundan geçmiştir; sürüm notlarında `sha256` değerleri bulunur. Ad-hoc imza, Apple notarizasyonu değildir.
 
 ## Homebrew ile kurulum (isteğe bağlı)
 
