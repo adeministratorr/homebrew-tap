@@ -1,6 +1,6 @@
 cask "udf-quicklook" do
   version "2026.10.19"
-  sha256 "4d39ee50f2399fcd3b848c2ecd99738df78576caf8680edce246f8e5ee97f43c"
+  sha256 "b4e44859c4d6d3a77ba353a28f2386d0b8f57b04242ec85305f52711eeda4eb3"
 
   url "https://github.com/adeministratorr/udf-quicklook-extension/releases/download/v#{version}/UdfQuicklook-arm64-#{version}.dmg",
       verified: "github.com/adeministratorr/udf-quicklook-extension/"

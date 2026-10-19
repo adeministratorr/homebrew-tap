@@ -1,6 +1,6 @@
 cask "tnb-eimza" do
   version "2026.10.18"
-  sha256 "25e865051b7f90d0711992ead6c600e3cd5134ad28169682c2aa0418903f7954"
+  sha256 "42e400c1ef2916dfd8c8ba8c23d652bafd20d15c0f56938daabb3ba946bd3a4e"
 
   url "https://github.com/adeministratorr/tnb-eimza-mac-arm64/releases/download/v#{version}/TnbEimza-arm64-#{version}.dmg",
       verified: "github.com/adeministratorr/tnb-eimza-mac-arm64/"

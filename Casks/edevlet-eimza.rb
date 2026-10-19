@@ -1,6 +1,6 @@
 cask "edevlet-eimza" do
   version "2026.10.18"
-  sha256 "6f2d6736fe2ef6159bfb93377a9c2929a952d4fb52282972b5acef3ffff58eea"
+  sha256 "930a540ff4550f035db09d96a9dcc230d6168c0b5c4e6da3166228f27d5453e4"
 
   url "https://github.com/adeministratorr/edevlet-eimza-mac-arm64/releases/download/v#{version}/EdevletEimza-arm64-#{version}.dmg",
       verified: "github.com/adeministratorr/edevlet-eimza-mac-arm64/"

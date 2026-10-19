@@ -1,6 +1,6 @@
 cask "uhap-eimza" do
   version "2026.10.18"
-  sha256 "6932cf225496be3f75c8cc4b7a566db3ff1f9915e5a9631a7d5e15e44b2180a7"
+  sha256 "3d91af90770e73226fab882055f02da961310d1542d5e65ecd8479e89fab3b02"
 
   url "https://github.com/adeministratorr/uhap-eimza-mac-arm64/releases/download/v#{version}/UhapEimza-arm64-#{version}.dmg",
       verified: "github.com/adeministratorr/uhap-eimza-mac-arm64/"

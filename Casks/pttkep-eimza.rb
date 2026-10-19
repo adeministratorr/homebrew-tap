@@ -1,6 +1,6 @@
 cask "pttkep-eimza" do
   version "2026.10.18"
-  sha256 "76f8be1c2e845938bb8253f8899c21901eae4ce45d6422a01ef1662b55a08024"
+  sha256 "07ff8103ed44be0188b9616a5b0ae505a71abf3573c6688eb40226e8507be1e3"
 
   url "https://github.com/adeministratorr/pttkep-eimza-mac-arm64/releases/download/v#{version}/PttkepEimza-arm64-#{version}.dmg",
       verified: "github.com/adeministratorr/pttkep-eimza-mac-arm64/"

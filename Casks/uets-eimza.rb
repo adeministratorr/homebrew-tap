@@ -1,6 +1,6 @@
 cask "uets-eimza" do
   version "2026.10.18"
-  sha256 "a6a6f315f4c01b33dc6d80a98b709154b1be5c24de9b1e79425e7d5ac092f0ab"
+  sha256 "85a295ebb445ec3d7943e8b67ea9fb9cf5112832a7bbf3110108ed421925bbdb"
 
   url "https://github.com/adeministratorr/uets-eimza-mac-arm64/releases/download/v#{version}/UetsEimza-arm64-#{version}.dmg",
       verified: "github.com/adeministratorr/uets-eimza-mac-arm64/"

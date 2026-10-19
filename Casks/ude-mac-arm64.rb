@@ -1,6 +1,6 @@
 cask "ude-mac-arm64" do
   version "2026.10.18"
-  sha256 "8a0de562b597681b169a76941519712e60a5ab9ac30b8fe743fef3b6c8e0305f"
+  sha256 "3108d8bead26eb64f2edf1774b50e519049e0cd1ca037200436f655458af8824"
 
   url "https://github.com/adeministratorr/ude-mac-arm64-1/releases/download/v#{version}/UdeMacArm64-arm64-#{version}.dmg",
       verified: "github.com/adeministratorr/ude-mac-arm64-1/"
