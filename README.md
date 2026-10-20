@@ -1,10 +1,12 @@
-![macOS için e-imza ve UYAP araçları — Homebrew Tap](assets/social-preview.jpg)
+![Mac için e-imza ve UYAP programları — Homebrew kurulum merkezi](assets/social-preview.jpg)
 
-# macOS için e-imza ve UYAP araçları — Kurulum merkezi
+# Mac için e-imza ve UYAP programları — Homebrew kurulum merkezi
 
 > **Kısa yanıt:** Mac'te e-Devlet'e e-imza ile girmeniz, UYAP belgesi açmanız, `.udf` önizlemesi ya da KEP/UETS işlemi yapmanız mı gerekiyor? Bu depo, bunun için gereken kurulum paketlerini tek yerde toplar. İşleminize uygun uygulamayı aşağıdaki tablodan seçin.
 >
 > **Önce resmî uygulamalar:** UYAP'ın resmî [Adalet E-İmza](https://bedesten.adalet.gov.tr/imza/) uygulaması ve resmî [UYAP Doküman Editörü](https://www.uyap.gov.tr/Uyap-Editor) önceliklidir. Bu depodaki paketler **gayriresmî topluluk dağıtımlarıdır** ve resmî uygulamaların yerine geçmez. UYAP'a ArkSigner/e-imza uygulamasıyla giriş 1 Haziran 2026'da sonlandırıldı; giriş artık e-Devlet Kapısı veya Adalet E-İmza üzerinden yapılır.
+
+**Ayrıntılı Türkçe anlatım:** [Mac’te e-imza ve UYAP kurulumu, ilk kullanım ve hata çözümleri](https://ademyuce.tr/macos-eimza-uyap/).
 
 ## Hangi uygulamayı kurmalıyım?
 
@@ -65,6 +67,7 @@ Bu bölümdeki paket e-imza/UYAP ile ilgili değildir:
 - **MacBook'umda e-imza çalışır mı?** Paketler Apple Silicon (M serisi) için native arm64'tür; Rosetta veya ayrı Java kurulumu gerekmez.
 - **Intel Mac'im var, çalışır mı?** Bu paketler arm64'tür; Intel desteklemez. UYAP Doküman Editörü'nün resmî sürümünde hem Intel hem Apple Silicon paketi bulunur.
 - **PTT KEP mi UETS mi kurayım?** İşlem kodunuzu hangi arayüzden aldıysanız onu kurun — UETS (e-tebligat) ile PTT KEP Webmail farklı uygulamalardır, kodlar karşılıklı geçmez.
+- **UETS’den gelen tebligatı okumak için e-imza gerekir mi?** Hayır. PTT’ye göre UETS’ye T.C. Kimlik No/UETS adresi ve UETS şifresi, e-Devlet, e-imza veya mobil imza ile giriş yapılabilir; yalnızca okumak için e-imza zorunlu değildir.
 - **Noterler hangi paketi kullanır?** TNB KEP girişi için TNB paketi; UYAP işlemleri için önce resmî Adalet E-İmza ve resmî editör.
 - **Kartım görünmüyor / "Akıllı Kart Bulunamadı"?** arm64 AKİS sürücüsü eksik olabilir; yukarıdaki sürücü adımına bakın.
 - **Gatekeeper "geliştirici doğrulanamadı" derse?** Cask kurulumları karantinayı kaldırır; `kur.sh` yolu uygulamayı kendi makinenizde derler. Yine çıkarsa: sağ tık → **Aç**.
